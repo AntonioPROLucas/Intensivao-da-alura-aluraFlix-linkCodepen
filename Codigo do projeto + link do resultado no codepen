@@ -1,0 +1,233 @@
+//HTML
+
+<html>
+
+<head>
+  <title>
+    Imersão Dev
+    <link rel="stylesheet" href="styles.css">
+  </title>
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="page-title">
+      Aluraflix
+    </h1>
+    <img src="https://www.alura.com.br/assets/img/imersoes/dev-2021/logo-imersao-aluraflix.svg" class="page-logo" alt="">
+    <p class="page-subtitle">
+      Qual seu filme/animação favorito(a)?
+    </p>
+    <div class="form-wrapper">
+      <input type="text" id="filme" name="filme" placeholder="Insira endereço de imagem">
+      <button onClick="adicionarFilme()">Adicionar Filme</button>
+    </div>
+  </div>
+  <div id="listaFilmes"></div>
+  <a href="https://alura.com.br/" target="_blank">
+    <img src="https://www.alura.com.br/assets/img/home/alura-logo.svg" alt="" class="alura-logo">
+  </a>
+</body>
+
+</html>
+
+//CSS
+
+body {
+  font-family: "Roboto Mono", monospace;
+  text-align: center;
+  background-color: #000000;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background-image 0.5s ease-in-out;
+}
+p {
+    font-family: 'Arial', sans-serif;
+    font-size: 2em;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 8.0);
+}
+
+.container {
+  text-align: center;
+  padding: 20px;
+}
+
+.page-title {
+  color: #ffffff;
+  margin: 0 0 5px;
+}
+
+.page-subtitle {
+  color: #ffffff;
+  margin-top: 5px;
+}
+
+.page-logo {
+  width: 200px;
+}
+
+.alura-logo {
+  width: 40px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+#listaFilmes img {
+  margin: 10px;
+  max-height: 250px;
+}
+
+.form-wrapper {
+  margin: 0 0 15px;
+}
+
+.form-wrapper input {
+  display: block;
+  margin: 0 auto;
+  padding: 10px 15px;
+}
+
+.form-wrapper button {
+  border: 0;
+  color: #ffffff;
+  background: #da1e26;
+  font-weight: bold;
+  padding: 15px 20px;
+  font-size: 16px;
+  borde-radius: 4px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.form-wrapper button:hover {
+  opacity: 0.8;
+}
+
+.botao-remover-filme {
+  width:80px;
+  color:white;
+  background: #da1e26;
+  cursor: pointer;
+}
+
+//JS
+
+document.addEventListener('DOMContentLoaded', function () {
+    setRandomBackground();
+});
+
+function setRandomBackground() {
+    const backgrounds = [
+        'url("https://caelum-online-public.s3.amazonaws.com/assets-imersaodev/background-aluraflix.png")',
+        'url("https://th.bing.com/th/id/R.725d23b873a4dfb484f4ca136ff8284b?rik=tdg26xe5emP8tQ&riu=http%3a%2f%2fwallpapercave.com%2fwp%2fVgIEO9k.jpg&ehk=tmT98pXUa1s3Y8erkO%2brNhoQdewUlUJKo69zPmm9DF4%3d&risl=&pid=ImgRaw&r=0")',
+        'url("https://i.pinimg.com/originals/4d/83/3c/4d833c35bd321efa5809b5f2f75e227b.jpg")',
+        'url("https://th.bing.com/th/id/R.57e9eba149a39e2cddc2b3085535eb33?rik=uYY7A3jU7QvtNw&riu=http%3a%2f%2fwww.boredart.com%2fwp-content%2fuploads%2f2017%2f01%2fharry-potter-wallpaper-1.jpg&ehk=wRdvmWvtvKGhvBYDvxNU9cLdSXp6wOyxtqKdGPGAyW0%3d&risl=&pid=ImgRaw&r=0")',
+    ];
+
+    const randomIndex = Math.floor(Math.random() * backgrounds.length);
+    const randomBackground = backgrounds[randomIndex];
+
+    document.body.style.backgroundImage = randomBackground;
+}
+
+var listaFilmes = [
+{nome:'School of Rock', endereco:"https://upload.wikimedia.org/wikipedia/pt/thumb/1/1b/Schoolrockposter.jpg/210px-Schoolrockposter.jpg"},
+{nome:'Arrival', endereco:"https://1.bp.blogspot.com/-ImZPRqLsluE/WFK156_6pNI/AAAAAAAAYBY/0lEhNRF5wfQdLfr6hpT57_Jt2eBrE9H5wCLcB/s1600/arrival-kartoun-desert.jpg"},{nome:'Spiderverse', endereco:"https://musicart.xboxlive.com/7/94fc5000-0000-0000-0000-000000000002/504/image.jpg"},
+{nome:'10 Things i hate about you', endereco:"https://upload.wikimedia.org/wikipedia/pt/7/76/10_Things_I_Hate_About_You.jpg"},
+{nome:'Matrix', endereco:"https://br.web.img2.acsta.net/medias/nmedia/18/91/08/82/20128877.JPG"},
+//nova lista
+{nome:'One Piece', endereco:"https://th.bing.com/th/id/OIP.CDd-B-5r9Dqdw1wHhLKlFAAAAA?rs=1&pid=ImgDetMain"},
+{nome:'Dragon Ball Z', endereco:"https://lh5.googleusercontent.com/_-ipo1LVaWr0/TbJGO-2bCBI/AAAAAAAABXw/vhSkKiyFLkw/s1600/Dragon%20Ball%20Z%20Capa.jpg"},
+{nome: 'Berserk', endereco:"https://alchetron.com/cdn/berserk-1997-tv-series-70fdd6d8-682a-4b21-935a-15c2f936d62-resize-750.jpeg"},
+{nome: 'Vinland Saga', endereco:"https://i0.wp.com/www.badtaste.it/tv/wp-content/uploads/sites/4/2021/07/vinland-saga-1.jpg?w=750&quality=85&strip=all&ssl=1"},
+{nome:'Jojos Bizarre Adventure', endereco:'https://i.pinimg.com/originals/66/97/0b/66970b7213f6af613654dd98cd5b4554.jpg'}
+];
+
+function removerFilme(event) {
+  var confirmacao = confirm("Tem certeza que deseja remover este filme?");
+  if (!confirmacao) {
+      return;  // Interrompe a função se o usuário clicar em "Cancelar"
+    }
+  event.target.parentElement.remove();
+}
+
+function adicionarFilme(){
+    var filmeFavorito = document.getElementById('filme').value;
+    
+    if(!listaFilmes.some(filme => filme.endereco === filmeFavorito) && document.getElementById('filme').value != '') {
+      // Verifica se o URL é uma imagem
+      if (ehImagem(filmeFavorito)) {
+        var nomeDoFilme = prompt('Qual o nome deste filme ?');
+      
+        // Verifica se o usuário clicou em "Cancelar"
+        if (nomeDoFilme === null) {
+            return;  // Interrompe a função se o usuário clicar em "Cancelar"
+        }
+        // Adiciona o filme à lista
+        listaFilmes.push({ nome: nomeDoFilme, endereco: filmeFavorito });
+
+        // Atualiza o elemento HTML
+        atualizarListaFilmes();
+     } 
+     else {
+       alert("Por favor, insira um URL de imagem válido.");
+    }
+  }
+  else if (document.getElementById('filme').value == ''){
+      alert("Campo obrigatório!") 
+  }
+  else {
+      alert("Este filme já está na lista!");
+  }
+  var filmeFavorito = document.getElementById('filme').value = '';
+}
+
+function ehImagem(url) {
+  // Verifica se a URL termina com uma extensão de arquivo de imagem comum
+  return /\.(jpg|jpeg|png|gif|bmp)$/i.test(url);
+}
+
+function atualizarListaFilmes() {
+  var elementoListaFilmes = document.getElementById('listaFilmes');
+  elementoListaFilmes.innerHTML = '';
+
+  for (var i = 0; i < listaFilmes.length; i++) {
+    var filme = listaFilmes[i];
+
+    // Cria uma div para cada filme
+    var filmeDiv = document.createElement('div');
+    filmeDiv.className = 'filme-item';  // para poder estilizar essa classe no CSS
+
+    // Adiciona a imagem à div
+    var imagem = document.createElement('img');
+    imagem.src = filme.endereco;
+    imagem.alt = 'filme';
+    filmeDiv.appendChild(imagem);
+
+    // Adiciona o nome do filme abaixo da imagem
+    var nomeFilme = document.createElement('p');
+    nomeFilme.innerText = filme.nome;
+    nomeFilme.style.color = 'white';  // Define a cor do texto para branco
+    filmeDiv.appendChild(nomeFilme);
+    
+    // Adiciona um botao de remover
+    var botaoRemover = document.createElement("button");
+    botaoRemover.classList.add("botao-remover-filme")
+
+    imagem.src = filme.endereco;
+    imagem.addEventListener("click", removerFilme);
+    botaoRemover.innerHTML = "Remover";
+    botaoRemover.addEventListener("click", removerFilme);
+
+    // Adiciona a div à lista
+    elementoListaFilmes.appendChild(filmeDiv);
+  }
+}
+
+atualizarListaFilmes();
+
+//Link do resultado : https://codepen.io/AntonioPROLucas/pen/WNPMQyM
